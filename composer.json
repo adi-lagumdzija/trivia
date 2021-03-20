@@ -1,0 +1,12 @@
+{
+    "name": "ibu/trivia",
+    "description": "trivia website",
+    "license": "Apache2",
+    "authors": [
+        {
+            "name": "adi-lagumdzija",
+            "email": "adilag0511@gmail.com"
+        }
+    ],
+    "require": {}
+}
