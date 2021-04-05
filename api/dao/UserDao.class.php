@@ -21,6 +21,10 @@ return $user;
 }
 
 public function update_user($id, $user){
+  $sql = "UPDATE users SET name = :name, email = :email, password = :password, accounts_id = :accounts_id WHERE id = :id";
+  $stmt= $this->connection->prepare($sql);
+  $user['id'] = $id;
+  $stmt->execute($user);
 
 }
 }

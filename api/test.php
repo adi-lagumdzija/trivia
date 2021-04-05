@@ -11,10 +11,10 @@ $user_dao = new UserDao();
 //$user = $user_dao->get_user_by_email("adilag@gmail.com");
 $user1 = [
   "name" => "Mirsad Vladic",
-  "email" => "mikuli@gmail.com",
+  "email" => "mirsad.vefic@gmail.com",
   "password" => "bbb",
   "accounts_id" => 4
 ];
-$user = $user_dao->add_user($user1);
+$user = $user_dao->update_user(5, $user1);
 print_r($user);
 ?>
