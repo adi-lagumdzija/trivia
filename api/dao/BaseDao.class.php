@@ -25,13 +25,14 @@ public function update(){
 
 public function query($query, $params){
   $stmt = $this->connection->prepare($query);
-$stmt->execute($params);
-return $stmt->fetchAll();
+  $stmt->execute($params);
+  return $stmt->fetchAll();
 
 }
 
-public function query_unique(){
-
+public function query_unique($query, $params){
+  $results = $this->query($query, $params);
+  return reset($results);
 }
 
 
