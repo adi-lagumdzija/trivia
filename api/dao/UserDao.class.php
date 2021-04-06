@@ -13,20 +13,16 @@ public function get_user_by_id($id){
 
 
 public function add_user($user){
-$sql = "INSERT INTO users (name, email, password, accounts_id) VALUES ( :name, :email, :password, :accounts_id)";
-$stmt= $this->connection->prepare($sql);
-$stmt->execute($user);
-$user['id'] = $this->connection->lastInsertId();
-return $user;
+  return $this->insert("users", $user);
 }
 
-public function update_user($id, $user){
-  $sql = "UPDATE users SET name = :name, email = :email, password = :password, accounts_id = :accounts_id WHERE id = :id";
-  $stmt= $this->connection->prepare($sql);
-  $user['id'] = $id;
-  $stmt->execute($user);
+//public function update_user($id, $user){
+  //$this->update("users", $id, $user);
 
-}
+//}
+public function update_user_by_email($email, $user){
+   $this->update("users", $email, $user, "email");
+ }
 }
 
 

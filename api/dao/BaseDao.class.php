@@ -14,14 +14,39 @@ public function __construct(){
   }
 }
 
-public function insert(){
+public function insert($table, $entity){
+  $query = "INSERT INTO ${table} (";
+  foreach ($entity as $column => $value) {
+    $query .= $column. ", ";
+  }
+  $query = substr($query, 0, -2);
+  $query  .= ") VALUES (";
+  foreach ($entity as $column => $value) {
+    $query .= ":" .$column.", ";
+    }
+    $query = substr($query, 0, -2);
+    $query .= ")";
 
+    $stmt= $this->connection->prepare($query);
+    $stmt->execute($entity);
+    $user['id'] = $this->connection->lastInsertId();
+    return $entity;
 }
 
-public function update(){
+/*public function update($table, $id, $entity){
+  $query = "UPDATE ${table} SET";
+  foreach($entity as $name => $value){
+    $query .= $name ."= :". $name. ", ";
 
+  }
+  $query = substr($query, 0, -2);
+  $query .= "WHERE id = :id";
+  $stmt= $this->connection->prepare($query);
+    $entity['id'] = $id;
+    $stmt->execute($entity);
+  }
+  */
 
-}
 
 public function query($query, $params){
   $stmt = $this->connection->prepare($query);
