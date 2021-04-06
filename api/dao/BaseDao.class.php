@@ -33,7 +33,7 @@ public function insert($table, $entity){
     return $entity;
 }
 
-/*public function update($table, $id, $entity){
+public function update($table, $id, $entity){
   $query = "UPDATE ${table} SET";
   foreach($entity as $name => $value){
     $query .= $name ."= :". $name. ", ";
@@ -45,7 +45,7 @@ public function insert($table, $entity){
     $entity['id'] = $id;
     $stmt->execute($entity);
   }
-  */
+
 
 
 public function query($query, $params){

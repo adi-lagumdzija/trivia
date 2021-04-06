@@ -16,10 +16,10 @@ public function add_user($user){
   return $this->insert("users", $user);
 }
 
-//public function update_user($id, $user){
-  //$this->update("users", $id, $user);
+public function update_user($id, $user){
+  $this->update("users", $id, $user);
 
-//}
+}
 public function update_user_by_email($email, $user){
    $this->update("users", $email, $user, "email");
  }

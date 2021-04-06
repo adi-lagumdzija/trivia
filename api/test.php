@@ -5,19 +5,11 @@ error_reporting(E_ALL);
 
 
 require_once dirname(__FILE__)."/dao/UserDao.class.php";
-
-$user_dao = new UserDao();
-//$user = $user_dao->get_user_by_id(2);
-//$user = $user_dao->get_user_by_email("adilag@gmail.com");
-$user1 = [
-  "email" => "ermin.ganic12345678@yahoo.com",
-  "accounts_id" => 5,
-  "name" => "ermin",
-  "password" => "mornar"
-];
+require_once dirname(__FILE__)."/dao/AccountDao.class.php";
 
 
-
-$user = $user_dao ->add_user($user1);
-print_r($user);
+$dao = new AccountDao();
+$dao -> update_account(1, ["name"=>"FKŽ"]);
+$accounts= $dao->get_all_accounts();
+print_r($accounts);
 ?>
