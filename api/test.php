@@ -7,9 +7,14 @@ error_reporting(E_ALL);
 require_once dirname(__FILE__)."/dao/UserDao.class.php";
 require_once dirname(__FILE__)."/dao/AccountDao.class.php";
 
-
 $dao = new AccountDao();
-$dao -> update_account(1, ["name"=>"FKŽ"]);
+
+$dao -> add_account([
+  "id" => 4,
+  "name" => "Bradikusi",
+  "createdAt" => date("Y-m-d H:i:s")
+]);
+
 $accounts= $dao->get_all_accounts();
 print_r($accounts);
 ?>

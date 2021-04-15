@@ -15,23 +15,23 @@ public function __construct(){
 }
 
 public function insert($table, $entity){
-  $query = "INSERT INTO ${table} (";
-  foreach ($entity as $column => $value) {
-    $query .= $column. ", ";
-  }
-  $query = substr($query, 0, -2);
-  $query  .= ") VALUES (";
-  foreach ($entity as $column => $value) {
-    $query .= ":" .$column.", ";
-    }
-    $query = substr($query, 0, -2);
-    $query .= ")";
+        $query = "INSERT INTO $table (";
 
-    $stmt= $this->connection->prepare($query);
-    $stmt->execute($entity);
-    $user['id'] = $this->connection->lastInsertId();
-    return $entity;
-}
+        foreach ($entity as $column => $value) {
+            $query .= "$column, ";
+        }
+        $query = substr($query, 0, -2) . ") VALUES (";
+
+        foreach ($entity as $column => $value) {
+            $query .= ":$column, ";
+        }
+        $query = substr($query, 0, -2) . ")";
+
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute($entity);//prevent sql injection
+        $entity["id"] = $this->connection->lastInsertId();
+        return $entity;
+    }
 
 public function update($table, $id, $entity){
   $query = "UPDATE ${table} SET";
@@ -42,7 +42,7 @@ public function update($table, $id, $entity){
   $query = substr($query, 0, -2);
   $query .= "WHERE id = :id";
   $stmt= $this->connection->prepare($query);
-    $entity['id'] = $id;
+  $entity['id'] = $id;
     $stmt->execute($entity);
   }
 

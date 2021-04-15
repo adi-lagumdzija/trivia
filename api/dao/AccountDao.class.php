@@ -3,7 +3,7 @@ require_once dirname(__FILE__)."/BaseDao.class.php";
 class AccountDao extends BaseDao{
 
   public function add_account($account){
-    return this->$this->insert("accounts", $account);
+    return $this->insert("accounts", $account);
   }
 
   public function update_account($id, $account){
