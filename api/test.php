@@ -6,15 +6,12 @@ error_reporting(E_ALL);
 
 require_once dirname(__FILE__)."/dao/UserDao.class.php";
 require_once dirname(__FILE__)."/dao/AccountDao.class.php";
+require_once dirname(__FILE__)."/dao/ScoreDao.class.php";
 
-$dao = new AccountDao();
 
-$dao -> add_account([
-  "id" => 4,
-  "name" => "Bradikusi",
-  "createdAt" => date("Y-m-d H:i:s")
-]);
+$dao = new ScoreDao();
 
-$accounts= $dao->get_all_accounts();
-print_r($accounts);
+
+$score = $dao->get_score_by_id(2);
+print_r($score);
 ?>
