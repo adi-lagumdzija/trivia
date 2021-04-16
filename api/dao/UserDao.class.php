@@ -23,6 +23,10 @@ public function update_user($id, $user){
 public function update_user_by_email($email, $user){
    $this->update("users", $email, $user, "email");
  }
+
+public function get_all_users(){
+  return $this->query("SELECT * FROM users", []);
+}
 }
 
 
