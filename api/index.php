@@ -5,12 +5,13 @@ error_reporting(E_ALL);
 */
 
 require dirname(__FILE__).'/../vendor/autoload.php';
+require dirname(__FILE__).'/dao/BaseDao.class.php';
 require dirname(__FILE__).'/dao/UserDao.class.php';
 
 
 Flight::route('/users', function(){
 $dao = new UserDao();
-$users = $dao->get_user_by_id(1);
+$users = $dao->get_user_by_email("ahmed@gmail.com");
 Flight::json($users);
 });
 
