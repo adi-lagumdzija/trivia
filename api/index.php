@@ -8,28 +8,32 @@ require dirname(__FILE__).'/../vendor/autoload.php';
 require dirname(__FILE__).'/dao/BaseDao.class.php';
 require dirname(__FILE__).'/dao/UserDao.class.php';
 
-
+Flight::register('userDao', 'UserDao');
 
 Flight::route('GET /users', function(){
-$dao = new UserDao();
-$users = $dao->get_all_users();
-Flight::json($users);
+Flight::json(Flight::userDao()->get_all_users());
 });
 
 Flight::route('GET /users/@id', function($id){
-$dao = new UserDao();
-$users = $dao->get_user_by_id($id);
-Flight::json($users);
+Flight::json(Flight::userDao()->get_user_by_id($id););
 });
 
 Flight::route('POST /users', function(){
-$request = Flight::request();
-$data = $request->data->getData();
-$dao = new UserDao();
-$users->dao->add($data);
-print_r($data);
+$request = Flight::request()->data->getData();;
+Flight::json(Flight::userDao()->add($data));
 });
 
+
+Flight::route('PUT /users/@id', function($id){
+$dao = new UserDao();
+$request = Flight::request();
+$data = $request->data->getData();
+$dao->update($id, $data);
+$users = $dao->get_user_by_id($id);
+Flight::json($users);
+
+
+});
 
 Flight::route('/hello', function(){
 echo 'second / route matched';

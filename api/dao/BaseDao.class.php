@@ -5,7 +5,7 @@ class BaseDao {
   protected $connection;
   private $table;
 
-  public function __construct(){
+  public function __construct($table){
 
     try {
       $this->connection = new PDO("mysql:host=".Config::DB_HOST.";dbname=".Config::DB_SCHEME, Config::DB_USERNAME, Config::DB_PASSWORD);
@@ -14,6 +14,26 @@ class BaseDao {
       throw $e;
     }
   }
+
+  protected function execute_update($table, $id, $entity, $id_column = "id")
+     {
+         //generating automated query
+         $query = "UPDATE $table SET ";
+
+         foreach ($entity as $column => $value) {
+             $query .= $column . " = :" . $column . ", ";
+         }
+
+         $query = substr($query, 0, -2);
+         $query .= " WHERE {$id_column} = :id";
+
+         //executing the query
+         $stmt = $this->connection->prepare($query);
+         $entity['id'] = $id;
+         $stmt->execute($entity);
+     }
+
+
 
   protected function insert($table, $entity){
           $query = "INSERT INTO $table (";
@@ -34,18 +54,11 @@ class BaseDao {
           return $entity;
       }
 
-  protected function update($table, $id, $entity){
-    $query = "UPDATE ${table} SET";
-    foreach($entity as $name => $value){
-      $query .= $name ."= :". $name. ", ";
+      public function update($id, $entity)
+        {
+            $this->execute_update($this->table, $id, $entity);
+        }
 
-    }
-    $query = substr($query, 0, -2);
-    $query .= "WHERE id = :id";
-    $stmt= $this->connection->prepare($query);
-    $entity['id'] = $id;
-      $stmt->execute($entity);
-    }
 
 
 
@@ -60,6 +73,11 @@ class BaseDao {
     $results = $this->query($query, $params);
     return reset($results);
   }
+
+  public function add($entity)
+    {
+        return $this->insert($this->table, $entity);
+    }
 
 
   }
