@@ -2,6 +2,10 @@
 require_once dirname(__FILE__)."/BaseDao.class.php";
 
 class QuestionDao extends BaseDao{
+  public function __construct(){
+    parent::__construct("scores");
+  }
+
   public function get_question_by_id($id){
   return $this->query_unique("SELECT question FROM questions WHERE id = :id",["id" => $id]);
 }
