@@ -1,3 +1,4 @@
 <?php
-echo "hello";
+require_once dirname(__FILE__).'/dao/ScoreDao.class.php';
+
  ?>

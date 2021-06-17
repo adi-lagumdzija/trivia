@@ -10,7 +10,7 @@ class QuestionDao extends BaseDao{
   return $this->query_unique("SELECT question FROM questions WHERE id = :id",["id" => $id]);
 }
 public function get_answers_by_id($id){
-  return $this->query_unique("SELECT fanswer1, fanswer2, fanswer3, tanswer FROM questions WHERE id = :id", ["id" => $id]);
+  return $this->query_unique("SELECT fanswer1, fanswer2, fanswer3, tanswer FROM questions WHERE id = :id", ["id" => $id] order by RAND() LIMIT 4);
 }
 }
 
